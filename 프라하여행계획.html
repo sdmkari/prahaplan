@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇨🇿 프라하 6박 7일 가족 여행 일정표</title>
+  <style>
+    :root {
+      --primary-color: #0f172a;
+      --accent-color: #2563eb;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-sub: #475569;
+      --border-color: #e2e8f0;
+      --notice-bg: #f0fdf4;
+      --notice-border: #bbf7d0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 70px;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    /* 상단 헤더 & 고정 아이콘 메뉴 */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 20px 16px 16px 16px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .header-title-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .header-title-box .flag { font-size: 1.8rem; }
+    .header-title-box h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; margin: 0; }
+    
+    .top-icon-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .top-icon-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .top-icon-btn.active {
+      background: #ffffff;
+      color: var(--primary-color);
+      border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    /* 시계 디자인 개선 (가독성 향상) */
+    .clocks-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .clock-box {
+      flex: 1;
+      background-color: #1e293b;
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #334155;
+    }
+    .clock-box .label {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .clock-box .time-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      color: #0f172a;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+      letter-spacing: 0.5px;
+    }
+    .time-diff {
+      font-size: 0.75rem;
+      color: #93c5fd;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* 일자별 탭 메뉴 */
+    .tab-container {
+      display: flex;
+      overflow-x: auto;
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 240px; /* 헤더 랩핑 시 가려지지 않도록 높이 넉넉히 */
+      z-index: 99;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .tab-container::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 14px 18px;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      color: var(--accent-color);
+      border-bottom-color: var(--accent-color);
+    }
+
+    /* 콘텐츠 영역 */
+    .container {
+      max-width: 600px;
+      margin: 16px auto 0;
+      padding: 0 16px;
+      min-height: 70vh; 
+    }
+    .tab-content { display: none; }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 타이틀 헤더 */
+    .day-header {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    }
+    .day-header h2 { font-size: 1.2rem; margin-bottom: 6px; font-weight: 800; display: flex; align-items: center; gap: 6px;}
+    .day-header p { font-size: 0.95rem; opacity: 0.95; }
+
+    /* 일자별 상단 참조사항 */
+    .daily-notice {
+      background-color: var(--notice-bg);
+      border: 1px solid var(--notice-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .daily-notice-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #166534;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .daily-notice ul { list-style: none; padding-left: 0; margin: 0; }
+    .daily-notice li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: #14532d;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .daily-notice li:last-child { margin-bottom: 0; }
+    .daily-notice li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #059669;
+      font-weight: bold;
+    }
+
+    /* 타임라인 (아코디언) */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background-color: #cbd5e1;
+    }
+    .timeline-item {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      overflow: hidden;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent-color);
+    }
+    .timeline-header {
+      padding: 18px 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .timeline-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .time {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      margin-bottom: 6px;
+      display: inline-block;
+      background: #eff6ff;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .toggle-icon {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+    .title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .timeline-body {
+      display: none;
+      padding: 0 16px 16px 16px;
+      border-top: 1px dashed #e2e8f0;
+      margin-top: 12px;
+      padding-top: 16px;
+    }
+    .timeline-item.expanded .timeline-body { display: block; }
+    .timeline-item.expanded .toggle-icon { transform: rotate(180deg); }
+    .desc ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 0;
+    }
+    .desc li {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .highlight-note {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      font-size: 0.85rem;
+      color: #92400e;
+      border-radius: 4px 8px 8px 4px;
+      line-height: 1.45;
+    }
+    .map-link-container {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background-color: #f1f5f9;
+      color: #334155;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* 환율 계산기 */
+    .converter-box {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+    .input-group { margin-bottom: 16px; }
+    .input-group label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.15rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .rate-info { font-size: 0.85rem; color: #64748b; text-align: right; font-weight: 600;}
+
+    /* 체코어 가이드 */
+    details.czech-category {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    details.czech-category summary {
+      padding: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary-color);
+      cursor: pointer;
+      background-color: #f8fafc;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details.czech-category summary::after {
+      content: '▼';
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    details.czech-category[open] summary::after { content: '▲'; }
+    
+    .czech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .czech-table th, .czech-table td {
+      padding: 16px 12px;
+      border-top: 1px solid #f1f5f9;
+      text-align: left;
+    }
+    .czech-table td.kor { 
+      font-weight: 700; 
+      color: #0f172a; 
+      width: 45%; 
+    }
+    .eng-sub {
+      display: block;
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .czech-table td.czk { color: var(--accent-color); font-weight: 800; font-size: 1rem; }
+    .czech-table td.pron { color: #d97706; font-size: 0.85rem; margin-top: 4px; font-weight: 600;}
+
+    /* 경비 배지 */
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-left: 6px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .badge-actual { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .badge-expected { background: #fef08a; color: #854d0e; border: 1px solid #fde047; }
+
+    /* 정보 및 테이블 공통 스타일 */
+    .info-section {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .info-section h3 {
+      font-size: 1.15rem;
+      color: #0f172a;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+      font-weight: 800;
+    }
+    .expense-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .expense-table th, .expense-table td { padding: 16px 4px; border-bottom: 1px solid #f8fafc; }
+    .expense-table th { text-align: left; color: #334155; font-weight: 700; line-height: 1.4;}
+    .expense-table td { text-align: right; color: #0f172a; font-weight: 800; font-size: 1rem; }
+    
+    /* 합계 금액 줄바꿈 방지 적용 */
+    .expense-table tr.total th,
+    .expense-table tr.total td { 
+      font-weight: 800; 
+      color: #0f172a; 
+      font-size: 1.15rem; 
+      border-top: 2px solid #cbd5e1; 
+      padding-top: 16px;
+      white-space: nowrap; 
+    }
+
+    ul.ref-list { list-style: none; padding-left: 0; }
+    ul.ref-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+    ul.ref-list li::before {
+      content: '📌';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 1.1rem;
+    }
+
+    /* 여행 꿀팁 특별 박스 */
+    .ai-tip-box {
+      background: linear-gradient(to bottom, #ffffff, #f8fafc);
+      border: 1px solid #e2e8f0;
+      border-top: 4px solid #2563eb;
+      padding: 24px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+    }
+    .ai-tip-box h4 {
+      color: #1e3a8a;
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+    }
+    .tip-item { margin-bottom: 20px; }
+    .tip-item:last-child { margin-bottom: 0; }
+    .tip-item strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .tip-item p {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.6;
+      margin: 0;
+      padding-left: 26px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title-box">
+      <span class="flag">🇨🇿</span>
+      <h1>프라하 가족 여행 일정표</h1>
+    </div>
+    
+    <!-- 상시 노출 고정 아이콘 탭 -->
+    <div class="top-icon-nav">
+      <button class="top-icon-btn" onclick="openTab(event, 'exchange', true)">💱 환율 계산</button>
+      <button class="top-icon-btn" onclick="openTab(event, 'czech', true)">🗣️ 현지어 가이드</button>
+      <button class="top-icon-btn" onclick="openTab(event, 'expense', true)">💸 예상 경비</button>
+      <button class="top-icon-btn" onclick="openTab(event, 'info', true)">📘 여행 꿀팁</button>
+      <button class="top-icon-btn" onclick="openTab(event, 'shopping', true)">🛍️ 쇼핑 정보</button>
+      <button class="top-icon-btn" onclick="openTab(event, 'tax', true)">🧾 면세 정보</button>
+    </div>
+
+    <!-- 실시간 시계 보드 (가독성 향상 & 아이콘 표기) -->
+    <div class="clocks-container">
+      <div class="clock-box">
+        <span class="label">🇰🇷 한국 KST</span>
+        <div class="time-pill" id="time-kr">--:--:--</div>
+      </div>
+      <div class="clock-box">
+        <span class="label">🇨🇿 체코 CEST</span>
+        <div class="time-pill" id="time-cz">--:--:--</div>
+      </div>
+    </div>
+    <div class="time-diff">※ 현재 프라하가 한국보다 7시간 느립니다.</div>
+  </header>
+
+  <!-- 일자별 탭 버튼 -->
+  <nav class="tab-container">
+    <button class="tab-btn active" onclick="openTab(event, 'day1')">1일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day2')">2일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day3')">3일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day4')">4일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day5')">5일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day6')">6일차</button>
+    <button class="tab-btn" onclick="openTab(event, 'day7')">7일차</button>
+  </nav>
+
+  <!-- 메인 컨텐츠 영역 (좌우 스와이프 적용) -->
+  <main class="container" id="swipe-area">
+    
+    <!-- DAY 1 -->
+    <div id="day1" class="tab-content active">
+      <div class="day-header">
+        <h2>Day 1 | 10.17 (토)</h2>
+        <p>인천 출발 ✈️ 프라하 입국 & 첫날 일정</p>
+      </div>
+      
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 1일차 특이사항</div>
+        <ul>
+          <li>공항 우버 탑승지는 1터미널 D/E 출구 건너편 <strong>P1 구역</strong>입니다.</li>
+          <li>할증 체계가 있어 대형(XL) 차량 기준 약 <strong>1,000 CZK</strong>가 예상됩니다.</li>
+          <li><strong>숙소 주소:</strong> Klimentská 1172/48, 110 00 Nové Město</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🛫 11:05 - 17:05</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">인천 → 프라하 직항 (KE969)</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>인천 국제공항에서 대한항공 탑승</li>
+                <li>약 13시간 비행 후 바츨라프 하벨 공항 도착</li>
+                <li>도착 후 입국 심사 및 수하물 수령 진행</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🚖 18:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">공항 입국 & 시내 이동</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Prague+Airport" target="_blank">📍 프라하 공항</a>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Klimentská+1172/48,+110+00+Nové+Město" target="_blank">🏠 숙소</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>입국장을 나와 1터미널 D/E 출구 맞은편 P1 주차장으로 이동</li>
+                <li>우버/볼트 앱을 통해 짐을 실을 수 있는 XL(대형) 차량 호출</li>
+                <li>차량 탑승 후 노베 메스토(Nové Město)에 위치한 숙소로 이동</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍔 20:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">저녁식사: Naše maso</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Nase+maso+Prague" target="_blank">📍 Naše maso</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>프라하 최고의 정육식당 맛집 방문</li>
+                <li>추천 메뉴: 드라이에이징 수제버거, 체코 전통 소시지</li>
+                <li>시원한 로컬 생맥주와 함께 프라하 첫 식사 즐기기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🛒 21:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">마트 장보기 & 숙소 체크인</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Palladium+Prague" target="_blank">📍 팔라디움 몰</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>대형 쇼핑몰 팔라디움 내 알베르트(Albert) 마트 방문</li>
+                <li>내일 아침식사용 빵, 생수, 과일 등 필수 생필품 장보기</li>
+                <li>숙소(Klimentská 1172/48)로 복귀하여 짐 정리 및 휴식</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div id="day2" class="tab-content">
+      <div class="day-header">
+        <h2>Day 2 | 10.18 (일)</h2>
+        <p>프라하 구시가지 도보 관광 🚶</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 2일차 특이사항</div>
+        <ul>
+          <li>시차 적응을 위해 무리하지 않고 구시가지를 중심으로 도보 관광을 진행합니다.</li>
+          <li>다음 날 장거리 운전 및 독일 이동 일정이 있으므로 <strong>컨디션 조절을 위해 일찍 복귀</strong>하여 휴식하세요.</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🏰 10:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">화약탑 & 시민회관 관람</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Powder+Tower+Prague" target="_blank">📍 화약탑</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>프라하 구시가지로 들어가는 관문인 화약탑 관람</li>
+                <li>과거 왕들의 대관식 행렬이 시작되었던 '왕의 길' 출발점</li>
+                <li>바로 옆에 위치한 아르누보 양식의 걸작 시민회관 외관 구경</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🕰️ 12:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">구시가 광장 & 천문시계탑</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Prague+Astronomical+Clock" target="_blank">📍 천문시계</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>12시 정각에 맞춰 구시청사 천문시계 인형쇼 감상 (10분 전 도착 권장)</li>
+                <li>광장 중앙의 얀 후스 동상 및 주변 풍경 사진 촬영</li>
+                <li>두 개의 비대칭 첨탑이 인상적인 틴 성모 교회 둘러보기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍽️ 14:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">점심식사: Havelská Koruna</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Havelska+Koruna+Prague" target="_blank">📍 식당 위치</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>현지인들이 즐겨 찾는 가성비 좋은 체코 가정식 칸틴(Canteen)</li>
+                <li>입구에서 종이를 받아 원하는 음식을 손가락으로 가리켜 주문</li>
+                <li>출구에서 종이를 내고 일괄 계산하는 시스템 유의</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🌉 15:00 - 17:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">하벨시장 구경 및 카를교 산책</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Charles+Bridge+Prague" target="_blank">📍 카를교</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>하벨 시장에서 과일 및 가벼운 마그넷 등 소품 구경</li>
+                <li>매달려 있는 '프로이트 동상' 골목을 지나며 카를교로 이동</li>
+                <li>카를교 위 얀 네포무츠키 성인 동상 만지며 소원 빌기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🥩 18:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">저녁식사: Beef House</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Beef+House+Prague" target="_blank">📍 Beef House</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>숙소 근처 도보권에 있는 스테이크 맛집 Beef House 방문</li>
+                <li>식사 후 체력 비축을 위해 숙소로 바로 복귀하여 일찍 취침</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div id="day3" class="tab-content">
+      <div class="day-header">
+        <h2>Day 3 | 10.19 (월)</h2>
+        <p>독일 드레스덴 & 바스타이 렌터카 투어 🚗</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 3일차 특이사항</div>
+        <ul>
+          <li>허츠 렌터카 픽업 시 <strong>약 200유로 보증금 승인</strong>이 있습니다.</li>
+          <li>국경 이동(Cross Border Fee) 명목으로 <strong>400 CZK 현장 추가 결제</strong>가 발생합니다.</li>
+          <li>차량 반납을 위해 연료는 <strong>Full to Full</strong> 원칙을 준수해야 합니다.</li>
+          <li>드레스덴 주차장(Parkplatz)은 선불 결제용 <strong>유로 동전</strong>이 필요할 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🔑 08:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">허츠 렌터카 차량 픽업</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Hertz+Diplomat+Hotel+Prague" target="_blank">📍 허츠 영업소</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>Diplomat 호텔 내 허츠 영업소 방문 (골드회원 24423275 제시)</li>
+                <li>국제면허증, 한국면허증, 여권, 본인 명의 신용카드 필수 지참</li>
+                <li>차량 외관 기스 및 주유 상태 확인 후 출발</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">⛰️ 10:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">작센 스위스 바스타이 다리</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Bastei+Bridge" target="_blank">📍 바스타이 다리</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>독일 국경을 넘어 작센 스위스 국립공원 도착</li>
+                <li>깎아지른 절벽 위 기암괴석과 바스타이 다리의 절경 감상</li>
+                <li>주차장에서 다리까지 도보 이동 (편안한 신발 권장)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍖 12:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">드레스덴 도착 & 점심식사</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Augustiner+Dresden" target="_blank">📍 아우구스티너</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>드레스덴 시내 진입 후 지정된 Parkplatz에 주차 (선불 기계 결제)</li>
+                <li>맛집 아우구스티너(Augustiner)에서 슈바인학센과 백소시지 주문</li>
+                <li>독일 전통 바이젠 맥주 곁들이기 (팁 5~10% 테이블 결제 추천)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🏰 13:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">드레스덴 시내 도보 관광</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Zwinger+Dresden" target="_blank">📍 츠빙거 궁전</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>마틴루터 광장 및 복원된 프라우엔 성당 내부 관람</li>
+                <li>'유럽의 발코니'라 불리는 브륄의 테라스 산책</li>
+                <li>마이센 도자기로 벽면을 장식한 '군주의 행렬' 벽화에서 인증샷</li>
+                <li>화려한 바로크 양식의 츠빙거 궁전 정원 둘러보기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🅿️ 18:00 - 20:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">프라하 복귀 및 사전예약 주차</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Soukenická+25+Prague" target="_blank">📍 예약 주차장</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>프라하 시내로 복귀 (약 1시간 30분 소요)</li>
+                <li>MR.PARKIT 앱으로 사전 예약해둔 Soukenická 25 실내 주차장에 주차</li>
+                <li>차량 내 귀중품을 남기지 않고 모두 챙겨서 숙소 복귀</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div id="day4" class="tab-content">
+      <div class="day-header">
+        <h2>Day 4 | 10.20 (화)</h2>
+        <p>체스키크룸로프 당일치기 & 차량 반납 🏰</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 4일차 특이사항</div>
+        <ul>
+          <li>체스키크룸로프 주차는 <strong>P4 주차장(하루 100 CZK)을 우선</strong> 공략하고, 만차 시 P1 주차장(290 CZK)을 이용하세요.</li>
+          <li>대중교통 3일권은 트램 정류장 기둥의 <strong>주황색 단말기에서 구입</strong>합니다.</li>
+          <li>트램/버스 첫 탑승 시 <strong>반드시 차량 내부의 노란색 펀칭기</strong>에 티켓을 개시(펀칭)해야 벌금을 피할 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🛣️ 07:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">체스키크룸로프 출발</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Parking+P4+Cesky+Krumlov" target="_blank">📍 P4 주차장</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>관광객이 몰리기 전 아침 일찍 체스키크룸로프로 출발 (약 2.5시간 소요)</li>
+                <li>동선이 좋고 가격이 저렴한 P4 주차장 우선 공략</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🚶‍♂️ 09:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">체스키 도보 관광</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Cesky+Krumlov+Castle" target="_blank">📍 체스키 성</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>웅장한 망토 다리(Cloak Bridge) 아치를 배경으로 사진 촬영</li>
+                <li>체스키 성에 올라 S자로 굽이치는 블타바 강과 붉은 지붕 뷰 감상</li>
+                <li>이발사의 다리와 뷰파크, 세미나르니 정원 여유롭게 산책</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍖 12:30</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">점심식사: 동굴식당 샤틀라바</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Krcma+Satlava+Cesky+Krumlov" target="_blank">📍 샤틀라바 식당</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>중세 시대 동굴 화로 분위기의 샤틀라바(Šatlava) 식당 방문</li>
+                <li>체코식 족발인 꼴레뇨와 다양한 고기가 나오는 바베큐 플래터 주문</li>
+                <li>시원한 코젤 흑맥주 곁들이기 (예약 필수인 인기 맛집)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">⛽ 15:00 - 17:30</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">프라하 복귀 및 차량 반납</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>오후 3시쯤 프라하로 복귀 출발</li>
+                <li>렌터카 지점 도착 전 가까운 주유소에서 반드시 연료 가득 채우기(Full)</li>
+                <li><strong>주유 팁:</strong> 렌터카 유종 뚜껑 확인 → 셀프 주유 → 주유기 번호 외우기 → 주유소 편의점 카운터에 번호 말하고 결제</li>
+                <li>17:30 이전 허츠 렌터카 안전하게 반납</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🎫 18:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">대중교통 3일권 구매 및 식사</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>렌터카 반납 후 인근 트램 정류장 주황색 기계에서 3일권 구매 (일반 3장, 50% 1장)</li>
+                <li>트램 탑승 즉시 내부 노란색 펀칭기에 티켓을 화살표 방향으로 밀어넣어 개시 타임라인 찍기</li>
+                <li>숙소 인근 식당에서 저녁 식사 및 휴식</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div id="day5" class="tab-content">
+      <div class="day-header">
+        <h2>Day 5 | 10.21 (수)</h2>
+        <p>프라하 성 관람 & 유람선 야경투어 🌙</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 5일차 특이사항</div>
+        <ul>
+          <li>프라하 성 스타벅스는 성 입장권 없이 <strong>무료 진입이 가능</strong>합니다 (오전 9시 오픈).</li>
+          <li>성 내부 관람을 위한 <strong>서킷 B 입장권은 현장 구매</strong>가 필요합니다. (성인 450, 65세 이상 300 CZK)</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">☕ 08:00 - 09:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">정원 산책 & 프라하 성 스타벅스</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Prague+Castle" target="_blank">📍 성 스타벅스</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>아침 일찍 트램을 타고 프라하 성 입구 크랄로브스카 정원 하차 및 산책</li>
+                <li>세계에서 가장 아름다운 전경을 자랑하는 성문 앞 스타벅스 9시 오픈런</li>
+                <li>성 입장권 없이 뷰포인트 진입 가능, 여유롭게 커피 마시며 프라하 전경 감상</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🏰 10:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">프라하 성 서킷 B 관람</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Prague+Castle" target="_blank">📍 프라하 성</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>티켓 오피스에서 서킷 B 입장권 현장 결제</li>
+                <li>알폰스 무하의 화려한 스테인드글라스가 돋보이는 <strong>성 비투스 대성당</strong> 관람</li>
+                <li>오래된 역사가 담긴 프라하 구왕궁 및 성 조지 수도원 방문</li>
+                <li>카프카의 작업실이 있던 아기자기한 골목, <strong>황금소로</strong> 탐방</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🚢 18:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">프라하보트 유람선 탑승</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>블타바강 선착장 도착 후 사전 예약한 바우처를 실물 티켓으로 교환</li>
+                <li>좋은 자리를 잡기 위해 출발 20분 전 여유있게 줄 서기</li>
+                <li>50분 코스 동안 카를교 아래를 지나며 낭만적인 프라하 야경 감상</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍺 20:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">저녁식사: Pork's Mostecka</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pork%27s+Prague" target="_blank">📍 Pork's</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>구시가지 쪽 꼴레뇨 1티어 맛집 Pork's 방문</li>
+                <li>겉은 바삭하고 속은 촉촉한 돼지 무릎 고기 메뉴 추천</li>
+                <li>시원하고 부드러운 필스너 우르켈 생맥주로 하루 피로 풀기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div id="day6" class="tab-content">
+      <div class="day-header">
+        <h2>Day 6 | 10.22 (목)</h2>
+        <p>신시가지 여유 & 기념품 집중 쇼핑 🛍️</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 6일차 특이사항</div>
+        <ul>
+          <li>내일 귀국 짐 정리를 편하게 하기 위해, <strong>선물/기념품 쇼핑은 오늘 집중적으로</strong> 하세요.</li>
+          <li>오전 일정은 비워두었으니 피로를 풀고 충분히 휴식하세요.</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🛌 오전</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">자유 시간 및 충분한 휴식</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>알람 없이 푹 자며 체력 회복하기</li>
+                <li>숙소 주변 로컬 카페에서 커피와 디저트 즐기기</li>
+                <li>동네 산책하며 현지 분위기 여유롭게 만끽하기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🏛️ 14:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">신시가지 명소 관람</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Wenceslas+Square+Prague" target="_blank">📍 바츨라프 광장</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>프라하의 봄을 상징하는 역사적인 바츨라프 광장 산책</li>
+                <li>광장 끝에 위치한 웅장한 프라하 국립박물관 외관 감상</li>
+                <li>근처 국립오페라 극장 등 아름다운 신시가지 건물들 둘러보기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🎁 오후 ~ 저녁</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">집중 쇼핑 및 저녁 식사</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Palladium+Prague" target="_blank">📍 팔라디움</a>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Manufaktura+Prague" target="_blank">📍 마누팍투라</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li><strong>팔라디움 몰:</strong> 지인 선물용 초콜릿 등 공산품, 의류 몰아서 구매</li>
+                <li><strong>마누팍투라:</strong> 시그니처 맥주 샴푸, 와인 샤워젤, 핸드크림 쇼핑</li>
+                <li><strong>Smaltum(스말툼):</strong> 핸드페인팅 귀여운 법랑 머그컵 및 마그넷 구매</li>
+                <li>양손 무겁게 숙소 복귀 후, 인근 식당에서 마지막 밤의 저녁 식사</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 7 -->
+    <div id="day7" class="tab-content">
+      <div class="day-header">
+        <h2>Day 7 | 10.23 (금)</h2>
+        <p>아쉬운 마지막 날 산책 & 귀국 일정 ✈️</p>
+      </div>
+
+      <div class="daily-notice">
+        <div class="daily-notice-title">📋 7일차 특이사항</div>
+        <ul>
+          <li>짐 보관소(LUGGAGE STORAGE)는 <strong>무인 락커 시스템</strong>이며 숙소(Klimentská) 인근 매장 확인 요망.</li>
+          <li>공항에 일찍 도착하여 <strong>여유롭게 텍스리펀</strong>을 준비하세요.</li>
+        </ul>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🧳 10:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">체크아웃 & 무인 짐 보관</div>
+            <div class="map-link-container" onclick="event.stopPropagation()">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=LUGGAGE+STORAGE+PRAGUE" target="_blank">📍 짐 보관소</a>
+            </div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>에어비앤비 깨끗하게 정리 후 10시 정각 체크아웃</li>
+                <li>시내 이동 편의를 위해 'LUGGAGE STORAGE PRAGUE' 무인 락커에 짐 보관</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🍲 12:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">마지막 점심 및 시내 산책</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>그동안 구글맵에 저장해두고 방문하지 못했던 시내 맛집 도전</li>
+                <li>구시가지 골목을 걸으며 남은 코루나 현금을 소진하여 작은 기념품 구매</li>
+                <li>카페에 앉아 여행 사진 정리하며 아쉬움 달래기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🚕 14:00</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">공항 이동 (우버 호출)</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>무인 락커에서 짐을 모두 수령</li>
+                <li>우버 앱으로 대형(XL) 차량 호출하여 바츨라프 하벨 공항(Terminal 1)으로 이동</li>
+                <li>공항 세관(Customs)에서 텍스리펀 도장 받고 환급 창구 방문하기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header" onclick="toggleItem(this)">
+            <div class="timeline-header-top">
+              <div class="time">🛬 19:05</div>
+              <div class="toggle-icon">▼</div>
+            </div>
+            <div class="title">프라하 출발 귀국편 (KE970)</div>
+          </div>
+          <div class="timeline-body">
+            <div class="desc">
+              <ul>
+                <li>출국장 진입 및 면세점 구경</li>
+                <li>대한항공 탑승하여 한국으로 귀국</li>
+                <li>(한국 시간) 10월 24일 토요일 오후 13:20 인천국제공항 무사 도착!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 환율 계산기 탭 -->
+    <div id="exchange" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+        <h2>💱 실시간 환율 계산기</h2>
+        <p>현지 쇼핑과 결제 시 빠르게 확인하세요</p>
+      </div>
+      <div class="converter-box">
+        <div class="input-group">
+          <label>🇨🇿 체코 코루나 (CZK)</label>
+          <input type="text" id="val-czk" placeholder="코루나 입력" oninput="convertCurrency('czk')">
+        </div>
+        <div class="input-group">
+          <label>🇪🇺 유로 (EUR)</label>
+          <input type="text" id="val-eur" placeholder="유로 입력" oninput="convertCurrency('eur')">
+        </div>
+        <div class="input-group">
+          <label>🇰🇷 대한민국 원 (KRW)</label>
+          <input type="text" id="val-krw" placeholder="원화 입력" oninput="convertCurrency('krw')">
+        </div>
+        <div class="rate-info">
+          ※ 기준 환율: 1 CZK = 67 KRW / 1 EUR = 1,600 KRW
+        </div>
+      </div>
+    </div>
+
+    <!-- 현지어 가이드 탭 -->
+    <div id="czech" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #be185d, #9d174d);">
+        <h2>🗣️ 현지어 가이드</h2>
+        <p>식당과 길거리에서 유용한 핵심 표현 모음</p>
+      </div>
+
+      <details class="czech-category" open>
+        <summary>👋 1. 기본 인사 및 예절</summary>
+        <table class="czech-table">
+          <tr>
+            <td class="kor">안녕하세요(아침)<br><span class="eng-sub">Good morning</span></td>
+            <td><div class="czk">Dobré ráno</div><div class="pron">도브레 라노</div></td>
+          </tr>
+          <tr>
+            <td class="kor">안녕하세요(낮)<br><span class="eng-sub">Good afternoon</span></td>
+            <td><div class="czk">Dobrý den</div><div class="pron">도브리 덴</div></td>
+          </tr>
+          <tr>
+            <td class="kor">안녕하세요(저녁)<br><span class="eng-sub">Good evening</span></td>
+            <td><div class="czk">Dobrý večer</div><div class="pron">도브리 베체르</div></td>
+          </tr>
+          <tr>
+            <td class="kor">안녕히 가세요<br><span class="eng-sub">Goodbye</span></td>
+            <td><div class="czk">Na shledanou</div><div class="pron">나 스흘레다노우</div></td>
+          </tr>
+          <tr>
+            <td class="kor">감사합니다<br><span class="eng-sub">Thank you</span></td>
+            <td><div class="czk">Děkuji</div><div class="pron">뎨꾸이</div></td>
+          </tr>
+          <tr>
+            <td class="kor">부탁합니다<br><span class="eng-sub">Please</span></td>
+            <td><div class="czk">Prosím</div><div class="pron">프로심</div></td>
+          </tr>
+          <tr>
+            <td class="kor">예 / 아니오<br><span class="eng-sub">Yes / No</span></td>
+            <td><div class="czk">Ano / Ne</div><div class="pron">아노 / 네</div></td>
+          </tr>
+          <tr>
+            <td class="kor">미안합니다<br><span class="eng-sub">Sorry</span></td>
+            <td><div class="czk">Promiňte</div><div class="pron">프로미녜테</div></td>
+          </tr>
+          <tr>
+            <td class="kor">영어 하시나요?<br><span class="eng-sub">Do you speak English?</span></td>
+            <td><div class="czk">Mluvíte anglicky?</div><div class="pron">믈루비테 안글리츠키?</div></td>
+          </tr>
+        </table>
+      </details>
+
+      <details class="czech-category">
+        <summary>🍽️ 2. 식당 & 카페</summary>
+        <table class="czech-table">
+          <tr><td class="kor">메뉴판 주세요<br><span class="eng-sub">Menu, please</span></td><td><div class="czk">Jídelní lístek, prosím</div><div class="pron">이델니 리스텍, 프로심</div></td></tr>
+          <tr><td class="kor">주문할게요<br><span class="eng-sub">I'd like to order</span></td><td><div class="czk">Chtěl bych si objednat</div><div class="pron">흐탸엘 비흐 시 오브예드나트</div></td></tr>
+          <tr><td class="kor">맥주 한 잔<br><span class="eng-sub">One beer, please</span></td><td><div class="czk">Jedno pivo, prosím</div><div class="pron">예드노 피보, 프로심</div></td></tr>
+          <tr><td class="kor">물 주세요<br><span class="eng-sub">Water, please</span></td><td><div class="czk">Vodu, prosím</div><div class="pron">보두, 프로심</div></td></tr>
+          <tr><td class="kor">덜 짜게 해주세요<br><span class="eng-sub">Less salty, please</span></td><td><div class="czk">Méně slané, prosím</div><div class="pron">메-녜 슬라네, 프로심</div></td></tr>
+          <tr><td class="kor">고수 빼주세요<br><span class="eng-sub">No coriander, please</span></td><td><div class="czk">Bez koriandru, prosím</div><div class="pron">베즈 코리안드루, 프로심</div></td></tr>
+          <tr><td class="kor">맛있어요!<br><span class="eng-sub">It's delicious!</span></td><td><div class="czk">Je to výborné</div><div class="pron">예 토 비보르네</div></td></tr>
+          <tr><td class="kor">포장해 주세요<br><span class="eng-sub">To go, please</span></td><td><div class="czk">S sebou, prosím</div><div class="pron">스 세보우, 프로심</div></td></tr>
+          <tr><td class="kor">계산할게요<br><span class="eng-sub">Check, please</span></td><td><div class="czk">Zaplatím, prosím</div><div class="pron">자플라팀, 프로심</div></td></tr>
+        </table>
+      </details>
+
+      <details class="czech-category">
+        <summary>🛍️ 3. 쇼핑 및 결제</summary>
+        <table class="czech-table">
+          <tr><td class="kor">얼마인가요?<br><span class="eng-sub">How much is it?</span></td><td><div class="czk">Kolik to stojí?</div><div class="pron">콜리크 토 스토이?</div></td></tr>
+          <tr><td class="kor">할인 되나요?<br><span class="eng-sub">Any discount?</span></td><td><div class="czk">Máte slevu?</div><div class="pron">마-테 슬레부?</div></td></tr>
+          <tr><td class="kor">이걸로 살게요<br><span class="eng-sub">I'll take this</span></td><td><div class="czk">Vezmu si to</div><div class="pron">베즈무 시 토</div></td></tr>
+          <tr><td class="kor">입어봐도 되나요?<br><span class="eng-sub">Can I try it on?</span></td><td><div class="czk">Můžu si to zkusit?</div><div class="pron">무-주 시 토 즈쿠시트?</div></td></tr>
+          <tr><td class="kor">영수증 주세요<br><span class="eng-sub">Receipt, please</span></td><td><div class="czk">Účet, prosím</div><div class="pron">우체트, 프로심</div></td></tr>
+          <tr><td class="kor">카드/현금 되나요?<br><span class="eng-sub">Card / Cash?</span></td><td><div class="czk">Karty / Hotově?</div><div class="pron">카르티 / 호토볘?</div></td></tr>
+          <tr><td class="kor">텍스리펀 되나요?<br><span class="eng-sub">Tax free?</span></td><td><div class="czk">Tax free?</div><div class="pron">택스 프리? (영어 통용)</div></td></tr>
+        </table>
+      </details>
+
+      <details class="czech-category">
+        <summary>🚇 4. 교통 및 길찾기</summary>
+        <table class="czech-table">
+          <tr><td class="kor">~가 어디인가요?<br><span class="eng-sub">Where is ~?</span></td><td><div class="czk">Kde je ~?</div><div class="pron">끄데 예 ~?</div></td></tr>
+          <tr><td class="kor">화장실<br><span class="eng-sub">Toilet</span></td><td><div class="czk">Toaleta</div><div class="pron">토알레타</div></td></tr>
+          <tr><td class="kor">지하철/트램/버스<br><span class="eng-sub">Metro/Tram/Bus</span></td><td><div class="czk">Metro / Tramvaj / Autobus</div><div class="pron">메트로 / 트람바이 / 아우토부스</div></td></tr>
+          <tr><td class="kor">표 한 장 주세요<br><span class="eng-sub">One ticket, please</span></td><td><div class="czk">Jednu jízdenku, prosím</div><div class="pron">예드누 이-즈덴쿠, 프로심</div></td></tr>
+        </table>
+      </details>
+    </div>
+
+    <!-- 예상 경비 탭 -->
+    <div id="expense" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #059669, #047857);">
+        <h2>💸 예상 경비 내역</h2>
+        <p>확정(결제완료) 내역과 현지 예상 경비를 확인하세요.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>💰 카테고리별 상세 경비</h3>
+        <table class="expense-table">
+          <tbody>
+            <tr>
+              <th>✈️ 비행기 왕복 (대한항공) <br><span class="badge badge-actual">결제완료</span></th>
+              <td>6,649,485 원</td>
+            </tr>
+            <tr>
+              <th>🏠 숙소 (에어비앤비 6박) <br><span class="badge badge-actual">결제완료</span></th>
+              <td>1,613,519 원</td>
+            </tr>
+            <tr>
+              <th>💵 하나머니 사전 환전 <br><span class="badge badge-actual">결제완료</span></th>
+              <td>1,738,315 원</td>
+            </tr>
+            <tr>
+              <th>💶 유로화 사전 환전 <br><span class="badge badge-actual">결제완료</span></th>
+              <td>489,600 원</td>
+            </tr>
+            <tr>
+              <th>🚗 허츠 렌터카 <br><span class="badge badge-actual">결제완료</span></th>
+              <td>239,935 원</td>
+            </tr>
+            <tr>
+              <th>🚢 프라하보트 사전 예약 <br><span class="badge badge-actual">결제완료</span></th>
+              <td>129,600 원</td>
+            </tr>
+            <tr>
+              <th>📝 기타 (면허/유심/수리) <br><span class="badge badge-actual">결제완료</span></th>
+              <td>117,568 원</td>
+            </tr>
+            <tr>
+              <th>👕 가족 단체 티셔츠 제작 <br><span class="badge badge-expected">예상비용</span></th>
+              <td>200,000 원</td>
+            </tr>
+            <tr>
+              <th>🛡️ 가족 여행자 보험(5인) <br><span class="badge badge-expected">예상비용</span></th>
+              <td>150,000 원</td>
+            </tr>
+            <tr>
+              <th>💳 신용카드 현지 결제액 <br><span class="badge badge-expected">예상비용</span></th>
+              <td>1,500,000 원</td>
+            </tr>
+            <tr class="total">
+              <th>총 합계 예상 금액</th>
+              <td>12,828,022 원</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 정보 및 참조 탭 -->
+    <div id="info" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
+        <h2>📘 여행 꿀팁 & 참조사항</h2>
+        <p>안전한 여행을 위한 연락망 및 로컬 꿀팁</p>
+      </div>
+
+      <!-- 제미나이의 실전 여행 꿀팁 -->
+      <div class="ai-tip-box">
+        <h4>💡 프라하 자유여행 핵심 꿀팁</h4>
+        
+        <div class="tip-item">
+          <strong>👗 10월 프라하 옷차림</strong>
+          <p>아침저녁으로 쌀쌀하고 일교차가 큽니다. 두꺼운 옷 하나보다는 입고 벗기 편한 <strong>경량 패딩, 얇은 가디건 등 겹쳐 입는 옷차림</strong>을 강력 추천합니다.</p>
+        </div>
+
+        <div class="tip-item">
+          <strong>🚋 돌길 걷기 & 편한 신발</strong>
+          <p>프라하 시내는 대부분 울퉁불퉁한 코블스톤(돌길)입니다. 예쁜 구두보다는 무조건 <strong>발이 편하고 쿠션감이 좋은 운동화</strong>를 신으셔야 부모님께서도 편안하게 여행하실 수 있습니다.</p>
+        </div>
+
+        <div class="tip-item">
+          <strong>🎫 대중교통 앱 & 펀칭 주의</strong>
+          <p>티켓을 구매하셨더라도 트램/버스에 타자마자 기계의 화살표 방향으로 티켓을 넣어 <strong>시간(펀칭)을 찍지 않으면 무임승차</strong>로 간주되어 엄청난 벌금을 냅니다. 종이 티켓이 번거롭다면 'PID Lítačka' 앱을 설치하여 모바일로 구매 및 개시하는 것을 추천합니다.</p>
+        </div>
+
+        <div class="tip-item">
+          <strong>💳 카드 vs 현금 & 팁 문화</strong>
+          <p>대부분 식당/마트에서 컨택트리스(Tap-to-pay) 카드 결제가 잘 됩니다. 하지만 유료 화장실(약 10~20 CZK)이나 팁, 길거리 간식 결제를 위해 약간의 코루나 동전과 소액권 현금은 꼭 챙겨 다니세요. 식당에서 팁은 <strong>통상 5~10%</strong> 정도 주며, 영수증 금액에 팁을 더한 금액을 웨이터에게 말해주면서 결제하는 것이 일반적입니다.</p>
+        </div>
+
+        <div class="tip-item">
+          <strong>💧 마트에서 생수 살 때 팁</strong>
+          <p>유럽 마트에서는 탄산수가 흔합니다. 일반 생수(Still)를 원하시면 <strong>Neperlivá</strong>라고 적힌 물을 고르시고, 탄산수(Sparkling)를 원하시면 <strong>Perlivá</strong>를 선택하세요.</p>
+        </div>
+
+        <div class="tip-item">
+          <strong>🛡️ 소매치기 주의 구역</strong>
+          <p>까를교, 구시가 광장(인형쇼 시간대), 프라하 성 등 사람이 붐비는 곳에서는 <strong>가방을 무조건 앞으로 메세요</strong>. 서명 운동을 하거나 사진을 찍어달라며 친근하게 길을 막는 수법을 특히 주의하세요.</p>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>📞 비상 연락망 & 기본 정보</h3>
+        <ul class="ref-list">
+          <li><strong>숙소 주소:</strong> Klimentská 1172/48, 110 00 Nové Město</li>
+          <li><strong>현지 한국어 병원:</strong> Unicare Medical Center <br> <span style="color:#2563eb; font-weight:bold;">☎ +420-602-201-040</span> (한국어 상담 가능)</li>
+          <li><strong>주체코 한국 대사관:</strong> <br> <span style="color:#2563eb; font-weight:bold;">☎ +420-234-090-411</span> <br> (스마트폰 '영사콜센터' 앱 설치 시 무료통화 가능)</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>🍽️ 꼭 먹어봐야 할 추천 로컬 메뉴</h3>
+        <ul class="ref-list">
+          <li><strong>꼴레뇨(Koleno):</strong> 체코식 겉바속촉 돼지 무릎 바베큐. 맥주와 완벽한 궁합을 자랑합니다.</li>
+          <li><strong>굴라쉬(Guláš):</strong> 깊고 진한 맛의 소고기 스튜 및 스프. 빵(크네들리키)을 소스에 찍어 먹습니다.</li>
+          <li><strong>스마제니 시르(Smažený sýr):</strong> 두툼하게 튀겨낸 체코식 치즈 튀김. 주로 타르타르 소스와 먹습니다.</li>
+          <li><strong>타르타르(Tatarák):</strong> 체코식 소고기 육회. 바삭하게 튀긴 빵(토핀키)에 생마늘을 슥슥 갈아 바른 뒤 고기를 올려 먹습니다.</li>
+          <li><strong>스비치코바(Svíčková):</strong> 부드러운 소고기에 달콤한 크림소스와 크렌베리, 빵(크네들리키)을 곁들인 전통 가정식.</li>
+          <li><strong>뜨르들로(Trdelník):</strong> 일명 '굴뚝빵'. 시나몬 설탕이 발려있으며 안쪽에 아이스크림을 채워 먹으면 맛있는 길거리 간식입니다.</li>
+          <li><strong>흘레비치키(Chlebíčky):</strong> 바게트 위에 햄, 치즈, 계란 등을 예쁘게 올린 체코식 오픈 샌드위치. 간단한 점심이나 간식으로 좋습니다.</li>
+          <li><strong>코폴라(Kofola):</strong> 체코의 국민 콜라. 일반 콜라보다 덜 달고 허브향이 나는 것이 독특합니다.</li>
+          <li><strong>메도브닉(Medovník):</strong> 꿀과 호두가 들어간 층층이 쌓은 체코 전통 꿀케이크. 커피와 잘 어울립니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 쇼핑 정보 탭 -->
+    <div id="shopping" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #db2777, #9d174d);">
+        <h2>🛍️ 프라하 쇼핑 정보</h2>
+        <p>마트, 기념품점, 필수 쇼핑 리스트</p>
+      </div>
+
+      <div class="info-section">
+        <h3>🛒 용도별 로컬 마트 공략</h3>
+        <ul class="ref-list">
+          <li><strong>리들 (Lidl):</strong> 가성비가 가장 좋고 베이커리 코너가 훌륭합니다. 현지인처럼 저렴하게 식료품을 장보기 좋은 곳입니다.</li>
+          <li><strong>알베르트 (Albert):</strong> 팔라디움 등 주요 쇼핑몰에 입점해 있어 접근성이 좋습니다. 다양한 공산품과 생필품 구매에 적합합니다.</li>
+          <li><strong>빌라 (Billa):</strong> 매장이 깔끔하고 신선한 과일과 채소를 구매하기 가장 좋은 프리미엄 마트입니다.</li>
+          <li><strong>테스코 (Tesco):</strong> 규모가 크고 물건이 다양하여 귀국 전 과자나 초콜릿 등 대량 구매 시 편리합니다.</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>🎁 프라하 필수 기념품 리스트</h3>
+        <ul class="ref-list">
+          <li><strong>마누팍투라 (Manufaktura):</strong> 체코를 대표하는 자연주의 화장품. 특히 맥주 샴푸, 와인 샤워젤, 살구 립밤이 베스트셀러이며 선물용으로 인기가 높습니다.</li>
+          <li><strong>하블리코바 아포테카 (Havlíkova Apotéka):</strong> 유기농 성분으로 만든 화장품 브랜드. '3분 아침 마스크팩'과 보습 연고가 한국인들에게 매우 유명합니다.</li>
+          <li><strong>보타니쿠스 (Botanicus):</strong> 일명 '전지현 장미 오일'로 유명한 천연 화장품 브랜드. 장미수와 사해 머드 비누도 인기가 많습니다.</li>
+          <li><strong>콜로나다 (Kolonáda):</strong> 마트에서 쉽게 살 수 있는 체코 전통 원형 웨하스 과자. 온천수로 만들어졌으며 커피와 곁들여 먹기 좋습니다.</li>
+          <li><strong>베헤로브카 (Becherovka):</strong> 체코의 국민 소화제이자 허브 술(리큐어). 독특한 계피와 허브 향이 특징이며 마트에서 미니 사이즈로도 구매 가능합니다.</li>
+          <li><strong>스말툼 (Smaltum):</strong> 알록달록하게 핸드페인팅 된 귀여운 법랑 머그컵, 네임택, 마그넷 등 아기자기하고 실용적인 소품을 팝니다.</li>
+          <li><strong>바탸 (Baťa):</strong> 체코의 국민 신발 브랜드. 바츨라프 광장 등에서 질 좋고 편안한 가죽 신발을 합리적인 가격에 득템할 수 있습니다.</li>
+          <li><strong>보헤미아 크리스탈 (Bohemia Crystal):</strong> 체코의 전통 있는 특산품. 우아한 와인잔이나 크리스탈 장식품을 좋아하는 분들께 추천합니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 면세 정보 탭 -->
+    <div id="tax" class="tab-content">
+      <div class="day-header" style="background: linear-gradient(135deg, #0284c7, #3730a3);">
+        <h2>🧾 체코 텍스리펀 (Tax Free) 가이드</h2>
+        <p>면세 혜택을 놓치지 않기 위한 공항 환급 절차</p>
+      </div>
+
+      <div class="ai-tip-box">
+        <h4>💰 텍스리펀 기본 조건</h4>
+        <p style="padding-left: 0; margin-bottom: 8px;">체코에서는 동일한 매장에서 같은 날 구매한 금액이 <strong>2,001 CZK</strong> 이상일 때 텍스리펀을 받을 수 있습니다. (약 11~14% 환급)</p>
+        <p style="padding-left: 0;">매장에서 결제할 때 반드시 <strong>"Tax Free, please"</strong>라고 말하고 면세 서류(Tax Free Form)와 원본 영수증을 받아야 합니다. (이때 여권을 꼭 지참하세요!)</p>
+      </div>
+
+      <div class="info-section">
+        <h3>✈️ 프라하 공항 환급 절차 4단계</h3>
+        <ul class="ref-list">
+          <li><strong>1. 공항 세관(Customs) 데스크 방문:</strong><br> 출국 당일, 짐을 부치기 전(위탁 수하물인 경우) 공항 터미널 1의 세관 데스크로 갑니다. 세관원이 구매한 물품을 확인하자고 할 수 있으니 면세품은 꺼내기 쉬운 곳에 두세요.</li>
+          <li><strong>2. 세관 도장(Stamp) 받기:</strong><br> 구매한 물건, 여권, 탑승권(또는 e-티켓), 영수증 및 면세 서류를 제시하고 <strong>반드시 서류에 세관 도장</strong>을 받아야 합니다. 도장이 없으면 환급이 절대 불가합니다.</li>
+          <li><strong>3. 환급사 데스크 이동 (Global Blue / Planet 등):</strong><br> 세관 도장을 받은 서류를 들고, 서류 상단에 적힌 해당 환급사의 데스크나 창구로 이동합니다.</li>
+          <li><strong>4. 환급 수단 선택 (신용카드 추천):</strong><br> 현장 현금 환급은 수수료율이 높아 손해가 큽니다. 환급받을 <strong>신용카드 번호를 서류에 기재</strong>한 후, 창구에 제출하거나 공항 내 비치된 전용 우체통에 봉투째 넣으면 2~4주 후 카드로 환급금이 들어옵니다.</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>🚨 주의사항</h3>
+        <ul class="ref-list">
+          <li>텍스리펀 창구는 줄이 길어 시간이 꽤 소요될 수 있으니, 출국일에는 <strong>비행기 출발 3~4시간 전에 공항에 도착</strong>하는 것을 권장합니다.</li>
+          <li>액체류(화장품, 술 등)를 구매하여 위탁 수하물로 부쳐야 하는 경우, 반드시 항공사 카운터에서 탑승권을 먼저 발권받고 짐을 부치기 직전에 세관 도장을 받아야 합니다.</li>
+          <li>시내에 있는 텍스리펀 라운지에서 미리 현금 환급을 받았더라도, 공항에서 <strong>마지막에 세관 도장을 받아 우체통에 넣는 절차를 꼭 완료</strong>해야 합니다. (미완료 시 등록된 카드로 위약금이 결제됩니다.)</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // 시계 업데이트 기능 (오전/오후 아이콘 추가 및 가독성 개선)
+    function updateClocks() {
+      const now = new Date();
+      
+      // 시간 포맷팅 헬퍼 함수
+      function formatTimeString(dateStr, timeZone) {
+        let d = new Date(new Date().toLocaleString("en-US", {timeZone: timeZone}));
+        let h = d.getHours();
+        let m = d.getMinutes().toString().padStart(2, '0');
+        let s = d.getSeconds().toString().padStart(2, '0');
+        let ampm = h >= 12 ? '오후' : '오전';
+        let icon = (h >= 6 && h < 18) ? '☀️' : '🌙';
+        
+        let displayH = h % 12;
+        displayH = displayH ? displayH : 12; 
+        displayH = displayH.toString().padStart(2, '0');
+        
+        return `${icon} ${ampm} ${displayH}:${m}:${s}`;
+      }
+
+      document.getElementById('time-kr').innerText = formatTimeString(now, 'Asia/Seoul');
+      document.getElementById('time-cz').innerText = formatTimeString(now, 'Europe/Prague');
+    }
+    setInterval(updateClocks, 1000);
+    updateClocks();
+
+    // 탭 전환 기능
+    function openTab(evt, tabId, isTopIcon = false, isSwipe = false) {
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+
+      const tabBtns = document.querySelectorAll(".tab-btn, .top-icon-btn");
+      tabBtns.forEach(btn => btn.classList.remove("active"));
+
+      document.getElementById(tabId).classList.add("active");
+      
+      let targetElement = evt ? evt.currentTarget : document.querySelector(`button[onclick*="'${tabId}'"]`);
+      if(targetElement) targetElement.classList.add("active");
+
+      // 스와이프 또는 일자 탭 클릭 시 스크롤 중앙 정렬
+      if(!isTopIcon && targetElement && targetElement.classList.contains('tab-btn')) {
+        targetElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      } else if (isTopIcon && !isSwipe) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // 아코디언 (개별 클릭)
+    function toggleItem(element) {
+      const parentItem = element.closest('.timeline-item');
+      parentItem.classList.toggle('expanded');
+    }
+
+    // 숫자 콤마 포맷팅
+    function formatNumberStr(numStr) {
+        let parts = numStr.toString().split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join('.');
+    }
+
+    // 환율 계산기 로직
+    function convertCurrency(source) {
+      const krwInput = document.getElementById('val-krw');
+      const czkInput = document.getElementById('val-czk');
+      const eurInput = document.getElementById('val-eur');
+      
+      const rateCZK = 67;
+      const rateEUR = 1600;
+
+      if (source === 'krw') {
+          let raw = krwInput.value.replace(/[^0-9.]/g, '');
+          if (raw === "") { czkInput.value = ""; eurInput.value = ""; return; }
+          let val = parseFloat(raw);
+          krwInput.value = formatNumberStr(raw);
+          czkInput.value = formatNumberStr((val / rateCZK).toFixed(1));
+          eurInput.value = formatNumberStr((val / rateEUR).toFixed(2));
+      } else if (source === 'czk') {
+          let raw = czkInput.value.replace(/[^0-9.]/g, '');
+          if (raw === "") { krwInput.value = ""; eurInput.value = ""; return; }
+          let val = parseFloat(raw);
+          czkInput.value = formatNumberStr(raw);
+          krwInput.value = formatNumberStr((val * rateCZK).toFixed(0));
+          eurInput.value = formatNumberStr(((val * rateCZK) / rateEUR).toFixed(2));
+      } else if (source === 'eur') {
+          let raw = eurInput.value.replace(/[^0-9.]/g, '');
+          if (raw === "") { krwInput.value = ""; czkInput.value = ""; return; }
+          let val = parseFloat(raw);
+          eurInput.value = formatNumberStr(raw);
+          krwInput.value = formatNumberStr((val * rateEUR).toFixed(0));
+          czkInput.value = formatNumberStr(((val * rateEUR) / rateCZK).toFixed(1));
+      }
+    }
+
+    // 스와이프 기능 처리 (좌우 넘기기)
+    let touchstartX = 0;
+    let touchendX = 0;
+
+    function handleSwipeGesture() {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab || !activeTab.id.startsWith('day')) return;
+
+      const currentDay = parseInt(activeTab.id.replace('day', ''));
+      const threshold = 60;
+
+      if (touchendX < touchstartX - threshold) {
+        if (currentDay < 7) {
+          openTab(null, 'day' + (currentDay + 1), false, true);
+        }
+      }
+      if (touchendX > touchstartX + threshold) {
+        if (currentDay > 1) {
+          openTab(null, 'day' + (currentDay - 1), false, true);
+        }
+      }
+    }
+
+    const swipeArea = document.getElementById('swipe-area');
+    swipeArea.addEventListener('touchstart', e => {
+      touchstartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    swipeArea.addEventListener('touchend', e => {
+      touchendX = e.changedTouches[0].screenX;
+      handleSwipeGesture();
+    }, {passive: true});
+  </script>
+</body>
+</html>
